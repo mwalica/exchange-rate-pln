@@ -1,14 +1,22 @@
 package ch.walica.exchange_rate_pln.presentation.add_currency_screen.components
 
+import android.app.Activity
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
@@ -27,71 +35,114 @@ fun AddCurrencyScreen(
     navController: NavController,
     addCurrencyViewModel: AddCurrencyViewModel = hiltViewModel()
 ) {
+    val activity = LocalContext.current as? Activity
+    var showMenu by remember {
+        mutableStateOf(false)
+    }
     val listOfCurrency = toCurrencyList()
     val state = addCurrencyViewModel.state
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            text = buildAnnotatedString {
-                append("Dodaj ")
-                withStyle(style = SpanStyle(color = color5)) {
-                    append(" walutę")
-                }
-            }.toUpperCase(),
-            style = MaterialTheme.typography.h1,
-            modifier = Modifier.padding(top = 22.dp, bottom = 22.dp)
-        )
 
-        if (listOfCurrency.isNotEmpty()) {
-            val currencyMutableList = mutableListOf<String>()
-            listOfCurrency.forEach { currency ->
-                currencyMutableList.add(currency.currency)
-            }
 
-            ExposedDropdownMenuBox(
-                expanded = state.isExpanded,
-                onExpandedChange = { ListOperation.Expanded(!state.isExpanded) }) {
-                TextField(
-                    value = state.selectedCurrency,
-                    onValueChange = {},
-                    readOnly = true,
-                    label = {
-                        Text(text = "Wybierz walutę")
-                    },
-                    trailingIcon = {
-                        ExposedDropdownMenuDefaults.TrailingIcon(expanded = state.isExpanded)
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(
+                        text = buildAnnotatedString {
+                            append("Dodaj ")
+                            withStyle(style = SpanStyle(color = color5)) {
+                                append(" walutę")
+                            }
+                        }.toUpperCase(),
+                        style = MaterialTheme.typography.h1,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                },
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "arrow back")
                     }
-                )
-                ExposedDropdownMenu(
-                    expanded = state.isExpanded,
-                    onDismissRequest = { ListOperation.Expanded(false) }) {
-                    currencyMutableList.forEachIndexed { index, currency ->
-                        DropdownMenuItem(onClick = {
-                            addCurrencyViewModel.onAction(
-                                ListOperation.SelectedCurrency(
-                                    listOfCurrency[index].currency
-                                )
-                            )
-                            addCurrencyViewModel.onAction(ListOperation.SelectedCode(listOfCurrency[index].code))
-                            addCurrencyViewModel.onAction(ListOperation.Expanded(false))
-                        }) {
-                            Text(text = currency)
+                },
+                backgroundColor = Color.Transparent,
+                elevation = 0.dp,
+                actions = {
+                    IconButton(
+                        onClick = { showMenu = !showMenu }
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.MoreVert,
+                            contentDescription = "drop down menu"
+                        )
+                    }
+                    DropdownMenu(
+                        expanded = showMenu,
+                        onDismissRequest = { showMenu = false }) {
+                        DropdownMenuItem(onClick = { activity?.finish() }) {
+                            Text(text = "Zamknij")
                         }
                     }
                 }
-            }
-            Button(onClick = {
-                addCurrencyViewModel.onAction(
-                    ListOperation.AddCurrencyCode(
-                        Currency(state.selectedCode, state.selectedCurrency)
+            )
+        }
+    ) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+
+
+            if (listOfCurrency.isNotEmpty()) {
+                val currencyMutableList = mutableListOf<String>()
+                listOfCurrency.forEach { currency ->
+                    currencyMutableList.add(currency.currency)
+                }
+
+                ExposedDropdownMenuBox(
+                    expanded = state.isExpanded,
+                    onExpandedChange = { addCurrencyViewModel.onAction(ListOperation.Expanded(!state.isExpanded))}) {
+                    TextField(
+                        value = state.selectedCurrency,
+                        onValueChange = {},
+                        readOnly = true,
+                        label = {
+                            Text(text = "Wybierz walutę")
+                        },
+                        trailingIcon = {
+                            ExposedDropdownMenuDefaults.TrailingIcon(expanded = state.isExpanded)
+                        }
                     )
-                )
-                navController.popBackStack()
-            }) {
-                Text(text = "Dodaj")
+                    ExposedDropdownMenu(
+                        expanded = state.isExpanded,
+                        onDismissRequest = { addCurrencyViewModel.onAction(ListOperation.Expanded(false))  }) {
+                        currencyMutableList.forEachIndexed { index, currency ->
+                            DropdownMenuItem(onClick = {
+                                addCurrencyViewModel.onAction(
+                                    ListOperation.SelectedCurrency(
+                                        listOfCurrency[index].currency
+                                    )
+                                )
+                                addCurrencyViewModel.onAction(ListOperation.SelectedCode(listOfCurrency[index].code))
+                                addCurrencyViewModel.onAction(ListOperation.Expanded(false))
+                            }) {
+                                Text(text = currency)
+                            }
+                        }
+                    }
+                }
+                Button(onClick = {
+                    addCurrencyViewModel.onAction(
+                        ListOperation.AddCurrencyCode(
+                            Currency(state.selectedCurrency, state.selectedCode)
+                        )
+                    )
+                    navController.popBackStack()
+                }) {
+                    Text(text = "Dodaj".uppercase())
+                }
             }
         }
     }
+
+
 }

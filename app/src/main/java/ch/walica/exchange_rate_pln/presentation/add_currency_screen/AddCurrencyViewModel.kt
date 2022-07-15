@@ -24,7 +24,7 @@ class AddCurrencyViewModel @Inject constructor(
 
     fun onAction(action: ListOperation) {
         when (action) {
-            is ListOperation.AddCurrencyCode -> delete(action.currency)
+            is ListOperation.DeleteCurrencyCode -> delete(action.currency)
             is ListOperation.AddCurrencyCode -> add(action.currency)
             is ListOperation.Expanded -> state = state.copy(
                 isExpanded = action.bool
@@ -40,13 +40,13 @@ class AddCurrencyViewModel @Inject constructor(
 
     private fun delete(currency: Currency) {
         viewModelScope.launch {
-            currencyRepository.insertCurrency(currency)
+            currencyRepository.deleteCurrency(currency)
         }
     }
 
     private fun add(currency: Currency) {
         viewModelScope.launch {
-            currencyRepository.deleteCurrency(currency)
+            currencyRepository.insertCurrency(currency)
         }
     }
 }
