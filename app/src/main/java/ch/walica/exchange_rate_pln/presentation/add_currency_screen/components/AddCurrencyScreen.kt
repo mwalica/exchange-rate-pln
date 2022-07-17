@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
@@ -23,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import ch.walica.exchange_rate_pln.R
 import ch.walica.exchange_rate_pln.domain.model.Currency
 import ch.walica.exchange_rate_pln.domain.model.toCurrencyList
 import ch.walica.exchange_rate_pln.presentation.add_currency_screen.AddCurrencyViewModel
@@ -49,9 +51,9 @@ fun AddCurrencyScreen(
                 title = {
                     Text(
                         text = buildAnnotatedString {
-                            append("Dodaj ")
+                            append(stringResource(id = R.string.title_add_currency_1) + " ")
                             withStyle(style = SpanStyle(color = color5)) {
-                                append(" walutę")
+                                append(stringResource(id = R.string.title_add_currency_2))
                             }
                         }.toUpperCase(),
                         style = MaterialTheme.typography.h1,
@@ -79,7 +81,7 @@ fun AddCurrencyScreen(
                         expanded = showMenu,
                         onDismissRequest = { showMenu = false }) {
                         DropdownMenuItem(onClick = { activity?.finish() }) {
-                            Text(text = "Zamknij")
+                            Text(text = stringResource(id = R.string.close_app))
                         }
                     }
                 }
@@ -106,7 +108,7 @@ fun AddCurrencyScreen(
                         onValueChange = {},
                         readOnly = true,
                         label = {
-                            Text(text = "Wybierz walutę")
+                            Text(text = stringResource(id = R.string.select_currency))
                         },
                         trailingIcon = {
                             ExposedDropdownMenuDefaults.TrailingIcon(expanded = state.isExpanded)
@@ -138,7 +140,7 @@ fun AddCurrencyScreen(
                     )
                     navController.popBackStack()
                 }) {
-                    Text(text = "Dodaj".uppercase())
+                    Text(text = stringResource(id = R.string.title_add_currency_1).uppercase())
                 }
             }
         }

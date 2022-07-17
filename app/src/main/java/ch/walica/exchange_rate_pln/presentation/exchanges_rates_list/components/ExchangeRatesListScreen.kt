@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -24,6 +25,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import ch.walica.exchange_rate_pln.R
 import ch.walica.exchange_rate_pln.domain.model.Currency
 import ch.walica.exchange_rate_pln.presentation.Screen
 import ch.walica.exchange_rate_pln.presentation.add_currency_screen.AddCurrencyViewModel
@@ -55,11 +57,11 @@ fun ExchangeRatesListScreen(
                 title = {
                     Text(
                         text = buildAnnotatedString {
-                            append("Średni")
+                            append(stringResource(id = R.string.title_exchange_rates_list_1) + " ")
                             withStyle(style = SpanStyle(color = color5)) {
-                                append(" kurs NBP")
+                                append(stringResource(id = R.string.title_exchange_rates_list_2) + " ")
                             }
-                            append(" walut")
+                            append(stringResource(id = R.string.title_exchange_rates_list_3))
                         }.toUpperCase(),
                         style = MaterialTheme.typography.h1,
                         textAlign = TextAlign.Center,
@@ -81,7 +83,7 @@ fun ExchangeRatesListScreen(
                         expanded = showMenu,
                         onDismissRequest = { showMenu = false }) {
                         DropdownMenuItem(onClick = { activity?.finish() }) {
-                            Text(text = "Zamknij")
+                            Text(text = stringResource(id = R.string.close_app))
                         }
                     }
                 }
@@ -170,7 +172,11 @@ fun ExchangeRatesListScreen(
                         navController.navigate(Screen.AddCurrencyScreen.route)
                     }
                 ) {
-                    Text(text = "Dodaj walutę".uppercase())
+                    Text(
+                        text = (stringResource(id = R.string.title_add_currency_1) + " " + stringResource(
+                            id = R.string.title_add_currency_2
+                        )).uppercase()
+                    )
                 }
             }
         }

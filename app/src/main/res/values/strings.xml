@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">exchange_rate_pln</string>
+    <string name="app_name">currency exchange rates NBP</string>
+    <string name="title_add_currency_1">Add</string>
+    <string name="title_add_currency_2">currency</string>
+    <string name="select_currency">select currency</string>
+    <string name="close_app">Close</string>
+    <string name="title_exchange_rates_list_1">Average</string>
+    <string name="title_exchange_rates_list_2">currency</string>
+    <string name="title_exchange_rates_list_3">rate NBP</string>
 </resources>
