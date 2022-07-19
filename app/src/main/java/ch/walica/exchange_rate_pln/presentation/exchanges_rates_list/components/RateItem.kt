@@ -47,7 +47,7 @@ fun RateItem(
             .padding(horizontal = 22.dp)
             .padding(top = 28.dp),
         shape = RoundedCornerShape(12.dp),
-        elevation = 22.dp
+        elevation = 16.dp
     ) {
         val percentValue = ((rate.mid * 100) / ratePrev.mid) - 100
         Column(
