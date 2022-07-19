@@ -165,7 +165,7 @@ fun ExchangeRatesListScreen(
             }
             Row(
                 horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.padding(8.dp)
+                modifier = Modifier.padding(12.dp)
             ) {
                 Button(
                     onClick = {

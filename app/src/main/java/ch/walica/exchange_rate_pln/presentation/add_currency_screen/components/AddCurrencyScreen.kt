@@ -101,6 +101,7 @@ fun AddCurrencyScreen(
                 }
 
                 ExposedDropdownMenuBox(
+                    modifier = Modifier.padding(top = 48.dp, bottom = 16.dp),
                     expanded = state.isExpanded,
                     onExpandedChange = { addCurrencyViewModel.onAction(ListOperation.Expanded(!state.isExpanded))}) {
                     TextField(
