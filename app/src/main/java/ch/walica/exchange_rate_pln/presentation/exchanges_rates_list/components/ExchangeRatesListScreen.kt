@@ -6,10 +6,7 @@ import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyVerticalGrid
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
@@ -161,18 +158,43 @@ fun ExchangeRatesListScreen(
                             }
                         }
                         Configuration.ORIENTATION_LANDSCAPE -> {
-
-                            LazyVerticalGrid(
-                                modifier = Modifier.fillMaxSize(),
-                                cells = GridCells.Fixed(2)
+                            LazyRow(
+                                modifier = Modifier.fillMaxSize()
                             ) {
                                 items(state.exchangeRates[1].rates.size) { ind ->
 
+                                    val dismissState = rememberDismissState(
+                                        confirmStateChange = {
+                                            if (it == DismissValue.DismissedToEnd || it == DismissValue.DismissedToStart) {
+                                                addCurrencyViewModel.onAction(
+                                                    ListOperation.DeleteCurrencyCode(
+                                                        Currency(
+                                                            state.exchangeRates[1].rates[ind].currency,
+                                                            state.exchangeRates[1].rates[ind].code
+                                                        )
+                                                    )
+                                                )
+                                            }
+                                            true
+                                        }
+                                    )
+
                                     if (mutableCurrenciesCodeList.contains(state.exchangeRates[1].rates[ind].code)) {
-                                        RateItem(
-                                            state.exchangeRates[1].rates[ind],
-                                            state.exchangeRates[0].rates[ind]
+                                        SwipeToDismiss(
+                                            state = dismissState,
+                                            directions = setOf(
+                                                DismissDirection.EndToStart,
+                                                DismissDirection.StartToEnd
+                                            ),
+                                            background = {},
+                                            dismissContent = {
+                                                RateItemHorizontal(
+                                                    state.exchangeRates[1].rates[ind],
+                                                    state.exchangeRates[0].rates[ind]
+                                                )
+                                            }
                                         )
+
                                     }
 
                                 }
