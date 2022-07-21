@@ -109,7 +109,9 @@ fun ExchangeRatesListScreen(
                 )
             }
             Box(
-                modifier = Modifier.weight(1f)
+                modifier = Modifier
+                    .weight(1f)
+                    .background(Color.Red)
             ) {
                 if (state.exchangeRates.isNotEmpty()) {
 
@@ -166,38 +168,11 @@ fun ExchangeRatesListScreen(
                             ) {
                                 items(state.exchangeRates[1].rates.size) { ind ->
 
-                                    val dismissState = rememberDismissState(
-                                        confirmStateChange = {
-                                            if (it == DismissValue.DismissedToEnd || it == DismissValue.DismissedToStart) {
-                                                addCurrencyViewModel.onAction(
-                                                    ListOperation.DeleteCurrencyCode(
-                                                        Currency(
-                                                            state.exchangeRates[1].rates[ind].currency,
-                                                            state.exchangeRates[1].rates[ind].code
-                                                        )
-                                                    )
-                                                )
-                                            }
-                                            true
-                                        }
-                                    )
-
                                     if (mutableCurrenciesCodeList.contains(state.exchangeRates[1].rates[ind].code)) {
-                                        SwipeToDismiss(
-                                            state = dismissState,
-                                            directions = setOf(
-                                                DismissDirection.EndToStart,
-                                                DismissDirection.StartToEnd
-                                            ),
-                                            background = {},
-                                            dismissContent = {
-                                                RateItem(
-                                                    state.exchangeRates[1].rates[ind],
-                                                    state.exchangeRates[0].rates[ind]
-                                                )
-                                            }
+                                        RateItem(
+                                            state.exchangeRates[1].rates[ind],
+                                            state.exchangeRates[0].rates[ind]
                                         )
-
                                     }
 
                                 }
