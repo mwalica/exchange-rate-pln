@@ -108,7 +108,6 @@ fun ExchangeRatesListScreen(
             Box(
                 modifier = Modifier
                     .weight(1f)
-                    .background(Color.Red)
             ) {
                 if (state.exchangeRates.isNotEmpty()) {
 
@@ -160,6 +159,7 @@ fun ExchangeRatesListScreen(
                         Configuration.ORIENTATION_LANDSCAPE -> {
                             LazyRow(
                                 modifier = Modifier.fillMaxSize()
+
                             ) {
                                 items(state.exchangeRates[1].rates.size) { ind ->
 

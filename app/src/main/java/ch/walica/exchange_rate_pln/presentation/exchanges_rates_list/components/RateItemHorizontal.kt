@@ -43,9 +43,8 @@ fun RateItemHorizontal(
     }
     Card(
         modifier = Modifier
-            .fillMaxWidth()
             .padding(horizontal = 22.dp)
-            .padding(top = 0.dp),
+            .padding(top = 28.dp),
         shape = RoundedCornerShape(12.dp),
         elevation = 16.dp
     ) {
@@ -54,8 +53,7 @@ fun RateItemHorizontal(
             modifier = Modifier.padding(8.dp)
         ) {
             Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.background(Color.Yellow)
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 Box(
                     modifier = Modifier
@@ -75,11 +73,11 @@ fun RateItemHorizontal(
                     text = rate.currency.replaceFirstChar { it.uppercase() }
                 )
             }
-//            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(8.dp))
 
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth().background(Color.Green)
+                modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
                     text = buildAnnotatedString {
@@ -88,9 +86,9 @@ fun RateItemHorizontal(
                             append("${rate.mid} PLN ")
                         }
                     },
-                    style = MaterialTheme.typography.h3,
-//                    modifier = Modifier.weight(1f)
+                    style = MaterialTheme.typography.h3
                 )
+                Spacer(modifier = Modifier.width(8.dp))
                 Text(
                     text = "%.2f".format(percentValue) + "%",
                     style = MaterialTheme.typography.h4,
