@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Kursy walut NBP</string>
+    <string name="app_name">Kurs PLN</string>
     <string name="title_add_currency_1">Dodaj</string>
     <string name="title_add_currency_2">walutę</string>
     <string name="select_currency">wybierz walutę</string>

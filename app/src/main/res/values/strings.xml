@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">currency exchange rates NBP</string>
+    <string name="app_name">PLN exchange rates</string>
     <string name="title_add_currency_1">Add</string>
     <string name="title_add_currency_2">currency</string>
     <string name="select_currency">select currency</string>
