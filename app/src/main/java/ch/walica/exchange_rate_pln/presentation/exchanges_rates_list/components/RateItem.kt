@@ -89,7 +89,7 @@ fun RateItem(
                         }
                     },
                     style = MaterialTheme.typography.h3,
-                    color = if(isSystemInDarkTheme()) grey1 else Color.DarkGray,
+                    color = if(isSystemInDarkTheme()) grey2 else Color.DarkGray,
                     modifier = Modifier.weight(1f)
                 )
                 Text(

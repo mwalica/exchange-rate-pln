@@ -12,7 +12,7 @@ val grey1 = Color(0xFFBABBC2)
 val grey2 = Color(0xFF7B8086)
 val darkGrey = Color(0xFF606163)
 val green = Color(0xFF15AD54)
-val lightBlack = Color(0x40474D)
+val lightBlack = Color(0xFF40474D)
 
 val color1 = Color(0xFFFB9E44)
 val color2 = Color(0xFFE33D73)

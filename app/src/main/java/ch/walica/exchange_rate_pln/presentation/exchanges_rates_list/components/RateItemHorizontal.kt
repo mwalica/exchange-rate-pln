@@ -90,7 +90,7 @@ fun RateItemHorizontal(
                         }
                     },
                     style = MaterialTheme.typography.h3,
-                    color = if(isSystemInDarkTheme()) grey1 else Color.DarkGray
+                    color = if(isSystemInDarkTheme()) grey2 else Color.DarkGray
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
