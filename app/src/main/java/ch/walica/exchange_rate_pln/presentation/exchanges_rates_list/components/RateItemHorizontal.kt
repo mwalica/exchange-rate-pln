@@ -2,6 +2,7 @@ package ch.walica.exchange_rate_pln.presentation.exchanges_rates_list.components
 
 import android.widget.Space
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -14,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
@@ -46,7 +48,8 @@ fun RateItemHorizontal(
             .padding(horizontal = 22.dp)
             .padding(top = 28.dp),
         shape = RoundedCornerShape(12.dp),
-        elevation = 16.dp
+        elevation = 16.dp,
+        backgroundColor = if(isSystemInDarkTheme()) Color.Black else Color.White
     ) {
         val percentValue = ((rate.mid * 100) / ratePrev.mid) - 100
         Column(
@@ -86,7 +89,8 @@ fun RateItemHorizontal(
                             append("${rate.mid} PLN ")
                         }
                     },
-                    style = MaterialTheme.typography.h3
+                    style = MaterialTheme.typography.h3,
+                    color = if(isSystemInDarkTheme()) grey1 else Color.DarkGray
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(

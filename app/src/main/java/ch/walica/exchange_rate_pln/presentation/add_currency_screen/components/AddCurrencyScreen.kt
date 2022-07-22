@@ -1,6 +1,7 @@
 package ch.walica.exchange_rate_pln.presentation.add_currency_screen.components
 
 import android.app.Activity
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -30,6 +31,7 @@ import ch.walica.exchange_rate_pln.domain.model.toCurrencyList
 import ch.walica.exchange_rate_pln.presentation.add_currency_screen.AddCurrencyViewModel
 import ch.walica.exchange_rate_pln.presentation.add_currency_screen.ListOperation
 import ch.walica.exchange_rate_pln.presentation.ui.theme.color5
+import ch.walica.exchange_rate_pln.presentation.ui.theme.grey1
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -58,6 +60,7 @@ fun AddCurrencyScreen(
                         }.toUpperCase(),
                         style = MaterialTheme.typography.h1,
                         textAlign = TextAlign.Center,
+                        color = if(isSystemInDarkTheme()) grey1 else Color.DarkGray,
                         modifier = Modifier.fillMaxWidth()
                     )
                 },

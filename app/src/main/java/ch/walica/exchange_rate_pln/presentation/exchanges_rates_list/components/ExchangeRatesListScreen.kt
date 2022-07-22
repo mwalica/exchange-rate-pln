@@ -5,6 +5,7 @@ import android.content.res.Configuration
 import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.*
 import androidx.compose.material.*
@@ -66,6 +67,7 @@ fun ExchangeRatesListScreen(
                             append(stringResource(id = R.string.title_exchange_rates_list_3))
                         }.toUpperCase(),
                         style = MaterialTheme.typography.h1,
+                        color = if(isSystemInDarkTheme()) grey1 else Color.DarkGray,
                         textAlign = TextAlign.Center,
                         modifier = Modifier.fillMaxWidth()
                     )
