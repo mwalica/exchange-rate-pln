@@ -14,6 +14,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import ch.walica.exchange_rate_pln.presentation.add_currency_screen.components.AddCurrencyScreen
+import ch.walica.exchange_rate_pln.presentation.exchanges_rates_detail.components.ExchangeRatesDetailScreen
 import ch.walica.exchange_rate_pln.presentation.exchanges_rates_list.components.ExchangeRatesListScreen
 import ch.walica.exchange_rate_pln.presentation.ui.theme.Exchange_rate_plnTheme
 import ch.walica.exchange_rate_pln.presentation.ui.theme.lightBlack
@@ -48,6 +49,11 @@ class MainActivity : ComponentActivity() {
                             route = Screen.AddCurrencyScreen.route
                         ) {
                             AddCurrencyScreen(navController = navController)
+                        }
+                        composable(
+                            route = Screen.ExchangeRatesDetailScreen.route + "/{code}"
+                        ) {
+                            ExchangeRatesDetailScreen(navController = navController)
                         }
                     }
                 }

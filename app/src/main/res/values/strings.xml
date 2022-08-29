@@ -7,4 +7,5 @@
     <string name="title_exchange_rates_list_1">Average</string>
     <string name="title_exchange_rates_list_2">currency</string>
     <string name="title_exchange_rates_list_3">rate NBP</string>
+    <string name="title_exchange_rates_detail"></string>
 </resources>

@@ -41,7 +41,8 @@ import ch.walica.exchange_rate_pln.presentation.ui.theme.*
 fun ExchangeRatesListScreen(
     navController: NavController,
     viewModel: ExchangeRatesListViewModel = hiltViewModel(),
-    addCurrencyViewModel: AddCurrencyViewModel = hiltViewModel()
+    addCurrencyViewModel: AddCurrencyViewModel = hiltViewModel(),
+
 ) {
     val activity = LocalContext.current as? Activity
     var showMenu by remember {
@@ -149,7 +150,9 @@ fun ExchangeRatesListScreen(
                                                 RateItem(
                                                     state.exchangeRates[1].rates[ind],
                                                     state.exchangeRates[0].rates[ind]
-                                                )
+                                                ){
+                                                    navController.navigate(Screen.ExchangeRatesDetailScreen.route + "/${state.exchangeRates[1].rates[ind].code}")
+                                                }
                                             }
                                         )
 
