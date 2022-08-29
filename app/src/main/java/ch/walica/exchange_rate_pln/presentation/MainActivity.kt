@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
 //                    color = MaterialTheme.colors.background
-                    color = if(isSystemInDarkTheme())  lightBlack else lightGrey
+                    color = if (isSystemInDarkTheme()) lightBlack else lightGrey
                 ) {
                     val navController = rememberNavController()
                     NavHost(
@@ -53,7 +53,10 @@ class MainActivity : ComponentActivity() {
                         composable(
                             route = Screen.ExchangeRatesDetailScreen.route + "/{code}"
                         ) {
-                            ExchangeRatesDetailScreen(navController = navController)
+                            ExchangeRatesDetailScreen(
+                                navController = navController,
+                                modifier = Modifier.fillMaxSize()
+                            )
                         }
                     }
                 }

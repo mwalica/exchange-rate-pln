@@ -2,6 +2,7 @@ package ch.walica.exchange_rate_pln.presentation.exchanges_rates_list.components
 
 import android.widget.Space
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -31,7 +32,8 @@ import ch.walica.exchange_rate_pln.utli.randomColor
 fun RateItemHorizontal(
     rate: Rate,
     ratePrev: Rate,
-    randomColor: Color = randomColor()
+    randomColor: Color = randomColor(),
+    onClick: () -> Unit
 ) {
     val currencySymbols =
         mapOf("EUR" to "€", "USD" to "$", "GBP" to "£", "JPY" to "¥", "CHF" to "₣")
@@ -46,7 +48,9 @@ fun RateItemHorizontal(
     Card(
         modifier = Modifier
             .padding(horizontal = 22.dp)
-            .padding(top = 28.dp),
+            .padding(top = 28.dp)
+            .clickable { onClick() }
+        ,
         shape = RoundedCornerShape(12.dp),
         elevation = 16.dp,
         backgroundColor = if(isSystemInDarkTheme()) Color.Black else Color.White

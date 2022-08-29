@@ -5,6 +5,6 @@
     <string name="select_currency">wybierz walutę</string>
     <string name="close_app">Zamknij</string>
     <string name="title_exchange_rates_list_1">Średnie</string>
-    <string name="title_exchange_rates_list_2">kurs</string>
+    <string name="title_exchange_rates_list_2">kursy</string>
     <string name="title_exchange_rates_list_3">walut NBP</string>
 </resources>

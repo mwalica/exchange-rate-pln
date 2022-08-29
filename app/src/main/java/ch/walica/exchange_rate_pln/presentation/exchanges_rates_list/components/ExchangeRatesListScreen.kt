@@ -35,6 +35,9 @@ import ch.walica.exchange_rate_pln.presentation.add_currency_screen.AddCurrencyV
 import ch.walica.exchange_rate_pln.presentation.add_currency_screen.ListOperation
 import ch.walica.exchange_rate_pln.presentation.exchanges_rates_list.ExchangeRatesListViewModel
 import ch.walica.exchange_rate_pln.presentation.ui.theme.*
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalFoundationApi::class)
 @Composable
@@ -43,7 +46,7 @@ fun ExchangeRatesListScreen(
     viewModel: ExchangeRatesListViewModel = hiltViewModel(),
     addCurrencyViewModel: AddCurrencyViewModel = hiltViewModel(),
 
-) {
+    ) {
     val activity = LocalContext.current as? Activity
     var showMenu by remember {
         mutableStateOf(false)
@@ -68,7 +71,7 @@ fun ExchangeRatesListScreen(
                             append(stringResource(id = R.string.title_exchange_rates_list_3))
                         }.toUpperCase(),
                         style = MaterialTheme.typography.h1,
-                        color = if(isSystemInDarkTheme()) grey1 else Color.DarkGray,
+                        color = if (isSystemInDarkTheme()) grey1 else Color.DarkGray,
                         textAlign = TextAlign.Center,
                         modifier = Modifier.fillMaxWidth()
                     )
@@ -103,7 +106,8 @@ fun ExchangeRatesListScreen(
         ) {
             if (state.exchangeRates.isNotEmpty()) {
                 Text(
-                    text = "(${state.exchangeRates[1].effectiveDate})",
+                    text = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)
+                        .format(LocalDate.parse(state.exchangeRates[1].effectiveDate)),
                     style = MaterialTheme.typography.h4,
                     modifier = Modifier.padding(bottom = 12.dp)
                 )
@@ -150,7 +154,7 @@ fun ExchangeRatesListScreen(
                                                 RateItem(
                                                     state.exchangeRates[1].rates[ind],
                                                     state.exchangeRates[0].rates[ind]
-                                                ){
+                                                ) {
                                                     navController.navigate(Screen.ExchangeRatesDetailScreen.route + "/${state.exchangeRates[1].rates[ind].code}")
                                                 }
                                             }
@@ -196,7 +200,9 @@ fun ExchangeRatesListScreen(
                                                 RateItemHorizontal(
                                                     state.exchangeRates[1].rates[ind],
                                                     state.exchangeRates[0].rates[ind]
-                                                )
+                                                ) {
+                                                    navController.navigate(Screen.ExchangeRatesDetailScreen.route + "/${state.exchangeRates[1].rates[ind].code}")
+                                                }
                                             }
                                         )
 
